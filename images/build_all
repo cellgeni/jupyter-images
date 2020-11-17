@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+#Settings
+DOCKERFILE_ROOT_DIR=/home/ubuntu/docker-jupyter/images
+REGISTRY=quay.io/prete/docker-jupyter
+LOG_DIR=$DOCKERFILE_ROOT_DIR/logs/
+mkdir -p $LOG_DIR
+
+#Build docker image
+function build {
+    echo "🐳 building '$IMAGE' image with tag '$TAG'"  | ts '[%Y-%m-%d %H:%M:%S]'
+    cd $DOCKERFILE_ROOT_DIR/$IMAGE
+    docker build --build-arg tag_name=$TAG --tag "$REGISTRY:$IMAGE-$TAG" . >  "$LOG_DIR/$IMAGE-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]'
+    BUILD_RESULT=$?
+    if [ $BUILD_RESULT -eq 0 ]; then
+        echo -e "✅ $IMAGE build successfully!" | ts '[%Y-%m-%d %H:%M:%S]'  
+    else
+        echo -e "❌ $IMAGE build failed!"  | ts '[%Y-%m-%d %H:%M:%S]'
+    fi
+    
+}
+
+if [[ ! -f $DOCKERFILE_ROOT_DIR/build_list.txt ]]; then
+    echo "❌ Missing $DOCKERFILE_ROOT_DIR/build_list.txt"
+    exit 0
+fi
+
+#Generate tag
+TAG="$(date '+%s')"
+echo "🏷️ Using tag $TAG"
+echo "----------------------"
+
+#Build for each image folder
+for IMAGE in $(cat $DOCKERFILE_ROOT_DIR/build_list.txt)
+do
+    build
+    echo "----------------------"
+done
+

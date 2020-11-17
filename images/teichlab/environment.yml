@@ -1,0 +1,39 @@
+name: teichlab
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python = 3.8
+  - pip >= 20.2.4
+  - numpy
+  - cython
+  - python-igraph
+  - pip:
+    - pandas 
+    - louvain 
+    - leidenalg
+    - gpy  
+    - scanpy 
+    - scikit-learn 
+    - matplotlib 
+    - snakemake 
+    - cmake 
+    - sccaf 
+    - pytest 
+    - plotly 
+    - ggplot
+    - scvi-tools 
+    - bbknn 
+    - h5py
+    - velocyto
+#    - fitsne
+    - spatialde
+#    - polo
+    - scvelo
+    - wot
+    - cellphonedb
+    - pyscenic
+    - scirpy
+    - palantir
+

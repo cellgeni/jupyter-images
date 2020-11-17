@@ -1,0 +1,7 @@
+base
+julia
+python
+r-base
+r-full
+py-r-full
+teichlab
