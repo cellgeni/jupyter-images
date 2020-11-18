@@ -2,7 +2,7 @@
 
 #Settings
 DOCKERFILE_ROOT_DIR=/home/ubuntu/docker-jupyter/images
-REGISTRY=quay.io/prete/docker-jupyter
+REGISTRY=quay.io/cellgeni/jupyter
 LOG_DIR=$DOCKERFILE_ROOT_DIR/logs/
 mkdir -p $LOG_DIR
 
@@ -25,8 +25,12 @@ if [[ ! -f $DOCKERFILE_ROOT_DIR/build_list.txt ]]; then
     exit 0
 fi
 
-#Generate tag
-TAG="$(date '+%s')"
+TAG=$1
+if [[ -z "$TAG" ]]; then
+  # Generate a tag with epoch if not provided
+  TAG="$(date '+%s')"
+fi
+
 echo "🏷️ Using tag $TAG"
 echo "----------------------"
 

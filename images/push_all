@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 DOCKERFILE_ROOT_DIR=/home/ubuntu/docker-jupyter/images
-REGISTRY=quay.io/prete/docker-jupyter
+REGISTRY=quay.io/cellgeni/jupyter
 TAG=$1
 LOG_DIR=$DOCKERFILE_ROOT_DIR/logs
 

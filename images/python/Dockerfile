@@ -1,6 +1,6 @@
 ARG tag_name
 ARG parent_image="base"
-ARG registry="quay.io/prete/docker-jupyter"
+ARG registry="quay.io/cellgeni/jupyter"
 
 FROM ${registry}:${parent_image}-${tag_name}
 

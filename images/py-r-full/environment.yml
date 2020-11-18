@@ -6,25 +6,30 @@ channels:
 dependencies:
   - python = 3.8
   - pip
-  - cython
-  - cmake
   - numpy
+  - cython
   - python-igraph
-  - pandas
-  - louvain 
-  - leidenalg
-  - scanpy 
-  - scikit-learn 
-  - matplotlib
-  - seaborn 
-  - sccaf 
-  - plotly 
-  - scvi-tools 
-  - bbknn 
-  - h5py
-  - scvelo
-  - scirpy
+  - scanpy
   - pip:
-      - palantir
-      - velocyto
-      - pyscenic 
+    - cython
+    - cmake
+    - numpy
+    - python-igraph
+    - pandas
+    - louvain 
+    - leidenalg
+    - scanpy 
+    - scikit-learn 
+    - matplotlib
+    - seaborn 
+    - sccaf 
+    - plotly 
+    - scvi-tools 
+    - bbknn 
+    - h5py
+    - scvelo
+    - scirpy
+    - palantir
+    - velocyto
+    - pyscenic 
+    - scrublet
