@@ -110,6 +110,7 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - Cairo
 
 ### r-base
+- Operating system: Ubuntu focal 20.04.1 LTS
 - Additional packages:
   - rclone v1.53.2
   - go v1.15.3
