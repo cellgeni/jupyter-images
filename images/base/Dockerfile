@@ -82,3 +82,4 @@ RUN mkdir -p /sanger/ && \
     echo "$image_name-$tag_name" > /sanger/image.info
 
 COPY poststart.sh /poststart/base.sh
+RUN chmod +x /poststart/*.sh

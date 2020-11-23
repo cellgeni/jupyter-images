@@ -3,5 +3,5 @@ julia
 python
 r-base
 r-full
-py-r-full
+python-r-full
 teichlab

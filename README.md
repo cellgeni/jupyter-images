@@ -19,16 +19,16 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   +-------+         +--------+         +--------+
                         +                  +
                         |                  |
+                        |                  V
+                        |              +--------+
+                        +------------< | r-full |
+                        |              +--------+
+                        |                  +
+                        |                  |
                         V                  V
-                   +-----------+       +--------+
-                   | py-r-full | <---+ | r-full |
-                   +-----------+       +--------+
-                                           +
-                                           |
-                                           V
-                                      +----------+
-                                      | teichlab |
-                                      +----------+
+                +---------------+     +----------+
+                | python-r-full |     | teichlab |
+                +---------------+     +----------+
 ```
 
 
@@ -39,7 +39,7 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - [julia](#julia) julia image, contains most popular julia packages for julia
   - [r-base](#r-base) R base image, contains R language kernel and R Studio with minimum packages
   - [r-full](#r-full) R full image, contains most popular R packages for R
-  - [py-r-full](#py-r-full) Python and R full image, contains most popular packages for both Python and R.
+  - [python-r-full](#python-r-full) Python and R full image, contains most popular packages for both Python and R.
   - [teichlab](#teichlab) custom image containing the Teichmann lab requirments
 
 ### base
@@ -181,7 +181,7 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - cole-trapnell-lab/leidenbase
   - cole-trapnell-lab/monocle3
 
-### py-r-full
+### python-r-full
 - Operating system: Ubuntu focal 20.04.1 LTS
 - Additional packages:
   - rclone v1.53.2
@@ -352,23 +352,20 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
 
 ### Build order
 1. [base](images/base/)
-2. [julia](images/julia/)
-3. [python](images/python/)
-4. [r-base](images/r-base/)
-5. [r-full](images/r-full/)
-6. [py-r-full](images/py-r-full/)
-7. [teichlab](images/teichlab/)
+2. [julia](images/julia/) ||  [python](images/python/) || [r-base](images/r-base/)
+3. [r-full](images/r-full/)
+4. [python-r-full](images/python-r-full/) ||  [teichlab](images/teichlab/)
 
 Order is taken from [images/build_list.txt](images/build_list.txt)
 
 ### Build images
 Each image is build using a `TAG` argument.
 ```bash
-docker build --build-arg tag_name=$TAG --tag "$REGISTRY:$IMAGE-$TAG" .
+docker build --build-arg tag_name=$TAG --build-arg parent_image=$PARENT_NAME --tag "$REGISTRY:$IMAGE-$TAG" .
 ```
 
 All images can be build at the same time by runnning
-`images/build_all`
+`images/build_parallel`
 
 ## Developer instructions
 

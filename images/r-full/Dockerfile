@@ -36,3 +36,5 @@ RUN echo "$image_name=$tag_name" >> /sanger/image.info && \
 
 
 COPY poststart.sh /poststart/r-full.sh
+RUN chmod +x /poststart/*.sh
+

@@ -53,3 +53,5 @@ RUN conda list > /sanger/conda.info && \
     echo "$image_name-$tag_name" >> /sanger/image.info
 
 COPY poststart.sh /poststart/julia.sh
+RUN chmod +x /poststart/*.sh
+

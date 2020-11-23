@@ -15,7 +15,7 @@ channels:
   - conda-forge
   - bioconda
 envs_dirs:
-  - /home/jovyan/conda-envs/
+  - /home/jovyan/my-conda-envs/
 create_default_packages:
   - pip
   - ipykernel

@@ -10,6 +10,7 @@ dependencies:
   - cython
   - python-igraph
   - scanpy
+  - python-annoy
   - pip:
     - cython
     - cmake
@@ -33,3 +34,4 @@ dependencies:
     - velocyto
     - pyscenic 
     - scrublet
+    - scanorama
