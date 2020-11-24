@@ -187,10 +187,6 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - rclone v1.53.2
   - go v1.15.3
   - singularity v3.6.1
-  - samtools
-  - bcftools
-  - bedtools
-  - parallel
 - Python v3.8.6
 - Python packages:
   - cython
@@ -214,6 +210,8 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - palantir
   - velocyto
   - pyscenic
+  - scrublet
+  - scanorama
   - rpy2
 - R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
 - RStudio version 1.2.5019
@@ -261,13 +259,15 @@ We support a Jupyter Hub server running on Sanger Cloud. Jupyter allows you to r
   - cole-trapnell-lab/leidenbase
   - cole-trapnell-lab/monocle3
 
-
 ### teichlab
 - Operating system: Ubuntu focal 20.04.1 LTS
 - Additional packages:
   - rclone v1.53.2
   - go v1.15.3
   - singularity v3.6.1
+  - samtools
+  - bcftools
+  - bedtools
 - Python v3.8.6
 - Python packages:
   - numpy
