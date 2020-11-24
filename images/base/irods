@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+singularity exec -B /nfs,/lustre,/warehouse /home/jovyan/.irods/irods.sif $@
