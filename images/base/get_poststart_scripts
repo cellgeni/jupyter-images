@@ -11,6 +11,6 @@ if [[ -d /poststart ]]; then
   rm -rf /poststart
 fi
 sudo mkdir -p /poststart
-mv /tmp/jupyter-images/poststart /poststart
-chmod +x /poststart/*
+sudo mv /tmp/jupyter-images/poststart /poststart
+sudo chmod +x /poststart/*
 
