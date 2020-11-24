@@ -5,7 +5,7 @@ TMP_NOTEBOOKS=/tmp/example-notebooks.zip
 wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip 
 unzip $TMP_NOTEBOOKS -d /tmp
 rm /tmp/notebooks-master/.gitignore /tmp/notebooks-master/LICENSE /tmp/notebooks-master/README.md
-cp -Rf /tmp/notebooks-master/. .
+cp -Rf /tmp/notebooks-master/. /home/jovyan/
 rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
 
 #conda config file

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-source /poststart/r-full.sh
+/poststart/r-full.sh
 
