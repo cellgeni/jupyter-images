@@ -81,5 +81,6 @@ RUN mkdir -p /sanger/ && \
     rclone --version > /sanger/rclone.info && \
     echo "$image_name-$tag_name" > /sanger/image.info
 
-COPY poststart.sh /poststart/base.sh
-RUN chmod +x /poststart/*.sh
+COPY get_poststart_scripts /usr/local/bin/get_poststart_scripts
+RUN chmod +x /usr/local/bin/get_poststart_scripts
+

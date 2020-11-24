@@ -37,7 +37,7 @@ docker build --build-arg tag_name=$TAG --tag "$REGISTRY:r-full-$TAG"  . >  "$LOG
 
 echo "🐳 🐳 building python-r-full and teichlabn at the same time"  | ts '[%Y-%m-%d %H:%M:%S]'
 cd $DOCKERFILE_ROOT_DIR/python
-docker build --build-arg tag_name=$TAG --build-arg parent_name="r-full" --build-arg image_name="python-r-full" --tag "$REGISTRY:python-r-full-$TAG" . >  "$LOG_DIR/python-r-full-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]' &
+docker build --build-arg tag_name=$TAG --build-arg parent_image="r-full" --build-arg image_name="python-r-full" --tag "$REGISTRY:python-r-full-$TAG" . >  "$LOG_DIR/python-r-full-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]' &
 python_r_full=$!
 cd $DOCKERFILE_ROOT_DIR/teichlab
 docker build --build-arg tag_name=$TAG --tag "$REGISTRY:teichlab-$TAG" . >  "$LOG_DIR/teichlab-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]' &

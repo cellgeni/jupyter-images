@@ -34,7 +34,3 @@ RUN echo "$image_name=$tag_name" >> /sanger/image.info && \
     conda list > /sanger/conda.info && \
     Rscript -e "as.data.frame(installed.packages()[,c(1,3:4)])[,1:2,drop=FALSE]" > /sanger/r-packages.info
 
-
-COPY poststart.sh /poststart/r-full.sh
-RUN chmod +x /poststart/*.sh
-

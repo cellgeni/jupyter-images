@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# clone repo to update scripts
+if [[ -d /tmp/jupyter-images ]]; then
+  rm -rf /tmp/jupyter-images
+fi
+git clone https://github.com/cellgeni/jupyter-images.git /tmp/jupyter-images
+
+# move scripts to where they are supposed to be
+if [[ -d /poststart ]]; then
+  rm -rf /poststart
+fi
+sudo mkdir -p /poststart
+mv /tmp/jupyter-images/poststart /poststart
+chmod +x /poststart/*
+

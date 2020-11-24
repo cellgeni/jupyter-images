@@ -27,6 +27,3 @@ RUN fix-permissions $CONDA_DIR
 RUN echo "$image_name-$tag_name" > /sanger/image.info && \
     conda list > /sanger/conda.info
 
-COPY *.sh /poststart/
-RUN chmod +x /poststart/*.sh
-

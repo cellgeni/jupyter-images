@@ -34,5 +34,3 @@ RUN fix-permissions $CONDA_DIR && \
 ENV TAG_NAME="teichlab-$tag_name"
 RUN echo "$TAG_NAME" >> /sanger/image.info
 
-COPY poststart.sh /poststart/teichlab.sh
-

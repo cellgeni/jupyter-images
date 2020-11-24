@@ -79,6 +79,3 @@ RUN R --version > /sanger/r.info && \
     echo "$rstudio_version" > /sanger/rstudio.info && \
     echo "$image_name-$tag_name" >> /sanger/image.info
 
-COPY poststart.sh /poststart/r-base.sh
-RUN chmod +x /poststart/*.sh
-
