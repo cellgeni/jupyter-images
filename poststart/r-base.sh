@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-/poststart/base.sh
+. /poststart/base.sh
 
 # set package manager repo
 # https://packagemanager.rstudio.com/client/#/repos/1/overview

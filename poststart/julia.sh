@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-/poststart/base.sh
+. /poststart/base.sh

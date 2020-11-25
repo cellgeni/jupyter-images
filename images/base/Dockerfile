@@ -74,6 +74,10 @@ RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoe
 COPY mount-farm /usr/local/bin/mount-farm
 RUN chmod +x /usr/local/bin/mount-farm
 
+# irods script
+COPY irods /usr/local/bin/irods
+RUN chmod +x /usr/local/bin/irods
+
 RUN mkdir -p /sanger/ && \
     conda list > /sanger/conda.info && \
     lsb_release -a > /sanger/ubuntu.info && \
