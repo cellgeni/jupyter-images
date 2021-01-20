@@ -21,29 +21,10 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# conda packages
-RUN conda install -c conda-forge mamba
-RUN mamba install -y \
-      jupyter-server-proxy \
-      nbresuse \ 
-      qtconsole \
-      ipywidgets \
-      ipykernel \
-      -c conda-forge
-
-RUN jupyter labextension install @jupyterlab/server-proxy
-
-# clean conda cache
-RUN  mamba clean --index-cache --tarballs --yes
-
-# fix permissions
-RUN fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
-
 # rclone
 RUN RCLONE_DEB=rclone-current-linux-amd64.deb && \
     cd /tmp && \
-    wget --quiet https://downloads.rclone.org/$RCLONE_DEB && \
+    wget --quiet https://downloads.rclone.org/$RCLONE_DEB -O /tmp/$RCLONE_DEB && \
     apt-get install -y /tmp/$RCLONE_DEB && \
     rm /tmp/$RCLONE_DEB
 
@@ -65,6 +46,29 @@ RUN export VERSION=3.6.1 && \
     cd /tmp/singularity && \
     ./mconfig && make -C builddir && make -C builddir install && \
     rm -rf /tmp/singularity/
+
+# conda packages
+RUN conda install -c conda-forge mamba
+RUN mamba install -y \
+      -c conda-forge \
+      jupyter-resource-usage \
+      ipywidgets \
+      ipykernel
+
+RUN pip install --no-cache-dir \
+      nbresuse==0.3.6
+
+RUN jupyter labextension install \
+      @jupyterlab/server-proxy \ 
+      jupyterlab-topbar-extension \
+      jupyterlab-system-monitor 
+
+# clean conda cache
+RUN  mamba clean --index-cache --tarballs --yes
+
+# fix permissions
+RUN fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 # give jovyan sudo permissions
 RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers && \
