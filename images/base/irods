@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
+IRODS_IMAGE_URL=https://cellgeni.cog.sanger.ac.uk/singularity/images/irods.sif
+IRODS_PATH=/home/jovyan/.irods/irods.sif
+if [[ ! -f "$IRODS_PATH" ]]; then
+    wget --quiet -O $IRODS_PATH $IRODS_IMAGE_URL
+fi
 
-singularity exec -B /nfs,/lustre,/warehouse /home/jovyan/.irods/irods.sif $@
+singularity exec -B /nfs,/lustre,/warehouse $IRODS_PATH $@
