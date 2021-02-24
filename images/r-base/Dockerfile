@@ -61,7 +61,7 @@ RUN pip install --upgrade --no-cache \
 RUN echo 'options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"))' > ~/.Rprofile
 
 ## R packages
-RUN Rscript -e 'install.packages(c("IRkernel", "Rmagic", "BiocManager", "devtools"), dependencies = TRUE)'
+RUN Rscript -e 'install.packages(c("devtools", "IRkernel", "Rmagic", "BiocManager"))'
 RUN Rscript -e 'IRkernel::installspec(prefix="/opt/conda")'
 RUN Rscript -e 'BiocManager::install()'
 

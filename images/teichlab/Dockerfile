@@ -17,7 +17,10 @@ RUN apt-get clean && \
 
 # conda packages
 COPY environment.yml /tmp/environment.yml
-RUN mamba env update --file /tmp/environment.yml
+RUN mamba env create --file /tmp/environment.yml && \
+    #/opt/conda/bin/conda activate teichlab && \
+    source activate teichlab && \
+    python -m ipykernel install --prefix=/opt/conda/envs/teichlab/ --name=teichlab
 
 # R packages
 RUN Rscript -e 'install.packages(c("vcfR","car","ggpubr","SoupX"));'
@@ -33,4 +36,5 @@ RUN fix-permissions $CONDA_DIR && \
 
 ENV TAG_NAME="teichlab-$tag_name"
 RUN echo "$TAG_NAME" >> /sanger/image.info
+
 

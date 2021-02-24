@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -t|--tag) TAG=$2 ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+if [[ -z "$TAG" ]]; then
+  TAG=$(date +%Y%m%d)
+  echo "📝 No tag provided, using: ${TAG}"
+fi
+
+./build.sh --tag $TAG --image base
+
+echo "🐳 🐳 🐳 building julia, r-base and python at the same time"  | ts '[%Y-%m-%d %H:%M:%S]'
+./build.sh --tag $TAG --image julia &
+julia=$!
+./build.sh --tag $TAG --image r-base &
+r_base=$!
+./build.sh --tag $TAG --image python &
+python=$!
+wait $julia $r_base $python
+
+echo "🐳 building r-full image"  | ts '[%Y-%m-%d %H:%M:%S]'
+./build.sh --tag $TAG --image r-full
+
+echo "🐳 🐳 building python-r-full and teichlabn at the same time"  | ts '[%Y-%m-%d %H:%M:%S]'
+./build.sh --tag $TAG --image python-r-full &
+python_r_full=$!
+./build.sh --tag $TAG --image teichlab &
+teichlab=$!
+wait $python_r_full $teichlab
+
+echo "finished building"  | ts '[%Y-%m-%d %H:%M:%S]'

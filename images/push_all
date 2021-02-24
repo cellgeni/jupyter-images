@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 
-if [ -z "$1" ]; then
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -t|--tag) TAG=$2 ; shift ;;
+        -r|--registry) REGISTRY=$2 ; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+
+if [[ -z "$TAG" ]]; then
   echo "No tag argument supplied."
-  echo " ./push_all <TAG>"
+  echo " ./push_all --tag <TAG>"
   exit
 fi
 
-DOCKERFILE_ROOT_DIR=/home/ubuntu/docker-jupyter/images
-REGISTRY=quay.io/cellgeni/jupyter
-TAG=$1
-LOG_DIR=$DOCKERFILE_ROOT_DIR/logs
+if [[ -z "$REGISTRY" ]]; then
+   REGISTRY=quay.io/cellgeni/jupyter
+   echo "No registry supplied. Using default: $REGISTRY"
+fi
 
-mkdir -p $LOG_DIR
-
-for IMAGE in $(cat $DOCKERFILE_ROOT_DIR/build_list.txt)
+for IMAGE in $(cat build_list.txt)
 do
-    echo "Pushing 📡  $REGISTRY:$IMAGE-$TAG"  | ts '[%Y-%m-%d %H:%M:%S]' 
-    docker push "$REGISTRY:$IMAGE-$TAG"  | ts '[%Y-%m-%d %H:%M:%S]' > "$LOG_DIR/$IMAGE-$TAG.push.log"
+    echo "Pushing 📡  $REGISTRY:$IMAGE-$TAG" 
+    docker push "$REGISTRY:$IMAGE-$TAG"
 done
 

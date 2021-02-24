@@ -9,7 +9,7 @@ mkdir -p $LOG_DIR
 TAG=$1
 if [[ -z "$TAG" ]]; then
   # Generate a tag with epoch if not provided
-  TAG="$(date '+%s')"
+  TAG=$(date +%Y%m%d)
 fi
 
 echo "🏷️ Using tag $TAG"
@@ -45,4 +45,4 @@ teichlab=$!
 wait $python_r_full $teichlab
 
 echo "finished building"  | ts '[%Y-%m-%d %H:%M:%S]'
-
+#./push_all $TAG

@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     fuse libfuse2 sshfs s3fs \
     # build dependencies for singularity
     build-essential uuid-dev libgpgme-dev squashfs-tools libseccomp-dev \
-    pkg-config gcc g++ cryptsetup-bin \
+    pkg-config gcc g++ cryptsetup-bin libgit2-dev \
     # base dependencies for general stuff
     libhdf5-dev hdf5-tools libigraph0-dev && \
     apt-get clean && \
@@ -55,13 +55,19 @@ RUN mamba install -y \
       ipywidgets \
       ipykernel
 
+# install pip packages
 RUN pip install --no-cache-dir \
       nbresuse==0.3.6
 
+# install jupyter extensions
 RUN jupyter labextension install \
       @jupyterlab/server-proxy \ 
       jupyterlab-topbar-extension \
-      jupyterlab-system-monitor 
+      jupyterlab-system-monitor \
+      @jupyterlab/toc
+
+# clean jupyter lab buil
+RUN rm -rf /opt/conda/share/jupyter/lab/staging/
 
 # clean conda cache
 RUN  mamba clean --index-cache --tarballs --yes

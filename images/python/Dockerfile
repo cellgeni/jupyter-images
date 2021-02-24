@@ -16,7 +16,7 @@ RUN apt-get update -y -qq && \
 
 # conda packages
 COPY environment.yml /tmp/environment.yml
-RUN mamba env update --file /tmp/environment.yml
+RUN mamba env update --name base --file /tmp/environment.yml
 
 # clean conda cache
 RUN  mamba clean --index-cache --tarballs --yes

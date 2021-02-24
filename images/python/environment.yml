@@ -11,26 +11,26 @@ dependencies:
   - python-igraph
   - scanpy
   - python-annoy
-  - pip:
-    - cython
-    - cmake
-    - numpy
-    - python-igraph
-    - pandas
-    - louvain 
-    - leidenalg
-    - scanpy 
-    - scikit-learn 
-    - matplotlib
-    - seaborn 
-    - sccaf 
+  - cython
+  - cmake
+  - numpy
+  - python-igraph
+  - pandas
+  - louvain 
+  - leidenalg
+  - scanpy 
+  - scikit-learn 
+  - matplotlib
+  - seaborn
+  - bbknn
+  - h5py
+  - pip: 
+#    - sccaf 
     - plotly 
     - scvi-tools 
-    - bbknn 
-    - h5py
     - scvelo
     - scirpy
-    - palantir
+#    - palantir
     - velocyto
     - pyscenic 
     - scrublet
