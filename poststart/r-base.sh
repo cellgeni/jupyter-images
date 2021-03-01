@@ -4,9 +4,14 @@
 
 # set package manager repo
 # https://packagemanager.rstudio.com/client/#/repos/1/overview
-cat > /home/jovyan/.Rprofile <<EOF
-options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"))
-EOF
+if [[ -z "$(grep REPO_NAME /home/jovyan/.Rprofile 2>/dev/null)" ]]; then
+  echo "options(repos = c(REPO_NAME = \"https://packagemanager.rstudio.com/all/__linux__/focal/latest\"))" >> /home/jovyan/.Rprofile
+fi
+
+# fix missing LC_ environment variables in RStudio
+if [[ -z "$(grep LC_ALL /home/jovyan/.Renviron 2>/dev/null)" ]]; then
+  echo "LC_ALL=en_US.UTF-8" >> /home/jovyan/.Renviron
+fi
 
 # install packages on home profile (/home/jovyan)
 # allows persistance of packages across sessions
