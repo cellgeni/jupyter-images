@@ -32,9 +32,15 @@ fi
 mkdir -p /home/jovyan/.irods/
 # wget -O /home/jovyan/.irods/irods.sif https://cellgeni.cog.sanger.ac.uk/singularity/images/irods.sif
 
-# set env vars for nbresuse limits
-#export MEM_LIMIT=$(cat /sys/fs/cgroup/memory/memory.limit_in_bytes)
-#CPU_NANOLIMIT=$(cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us)
-#export CPU_LIMIT=$(($CPU_NANOLIMIT/100000))
+
+# add conda init to ~/.profile script
+if [[ -z "$(grep conda /home/jovyan/.profile 2>/dev/null)" ]]; then
+cat >> /home/jovyan/.profile <<EOF
+# !! Contents within this block are managed by 'conda init' !!
+eval "\$('/opt/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# <<< conda initialize <<<
+EOF
+fi
+
 
 export USER=jovyan
