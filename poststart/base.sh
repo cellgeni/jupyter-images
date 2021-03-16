@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-# copy example notebooks
-TMP_NOTEBOOKS=/tmp/example-notebooks.zip
-wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip 
-unzip $TMP_NOTEBOOKS -d /tmp
-rm /tmp/notebooks-master/.gitignore /tmp/notebooks-master/LICENSE /tmp/notebooks-master/README.md
-cp -Rf /tmp/notebooks-master/. /home/jovyan/
-rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
+# copy example notebooks only if there are more than 5GB left
+if [[ "$(df -k /home/jovyan | awk 'NR>1 {print $4}')" -ge "5000000" ]]; then
+    TMP_NOTEBOOKS=/tmp/example-notebooks.zip
+    wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip
+    unzip $TMP_NOTEBOOKS -d /tmp
+    rm /tmp/notebooks-master/.gitignore /tmp/notebooks-master/LICENSE /tmp/notebooks-master/README.md
+    cp -Rf /tmp/notebooks-master/. /home/jovyan/
+    rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
+fi
+
 
 #conda config file
 cat > /home/jovyan/.condarc <<EOF
@@ -21,6 +24,7 @@ create_default_packages:
   - ipykernel
 EOF
 
+
 # create matching folders to mount the farm
 if [ ! -d /nfs ] || [ ! -d /lustre ] || [ ! -d /warehouse ]; then
     sudo mkdir -p /nfs
@@ -28,9 +32,9 @@ if [ ! -d /nfs ] || [ ! -d /lustre ] || [ ! -d /warehouse ]; then
     sudo mkdir -p /warehouse
 fi
 
+
 # create irods path
 mkdir -p /home/jovyan/.irods/
-# wget -O /home/jovyan/.irods/irods.sif https://cellgeni.cog.sanger.ac.uk/singularity/images/irods.sif
 
 
 # add conda init to ~/.profile script
