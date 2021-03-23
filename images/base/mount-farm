@@ -18,5 +18,5 @@ for MOUNT_POINT in /nfs /lustre /warehouse; do
     if [ ! -d "$MOUNT_POINT" ]; then
         sudo mkdir -p ${MOUNT_POINT}
     fi
-    echo "${SANGER_PASSWORD}" | sudo sshfs -o password_stdin,allow_other,auto_unmount,no_remote_lock,StrictHostKeyChecking=no ${SANGER_USER}@${FARM_LOGIN}:${MOUNT_POINT} ${MOUNT_POINT}
+    echo "${SANGER_PASSWORD}" | sudo sshfs -o password_stdin,reconnect,allow_other,auto_unmount,no_remote_lock,StrictHostKeyChecking=no ${SANGER_USER}@${FARM_LOGIN}:${MOUNT_POINT} ${MOUNT_POINT}
 done 
