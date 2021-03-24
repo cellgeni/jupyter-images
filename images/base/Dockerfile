@@ -81,7 +81,7 @@ RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoe
     echo "jovyan ALL= (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/jovyan
 
 # fix for ssh disconnections
-COPY keeepalive.conf /etc/ssh/ssh_config.d/keepalive.conf
+COPY keepalive.conf /etc/ssh/ssh_config.d/keepalive.conf
 
 # mount-farm script
 COPY mount-farm /usr/local/bin/mount-farm
