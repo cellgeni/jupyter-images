@@ -1,0 +1,37 @@
+name: base
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python = 3.8
+  - pip
+  - numpy
+  - cython
+  - python-igraph
+  - scanpy
+  - python-annoy
+  - cython
+  - cmake
+  - numpy
+  - python-igraph
+  - pandas
+  - louvain 
+  - leidenalg
+  - scanpy 
+  - scikit-learn 
+  - matplotlib
+  - seaborn
+  - bbknn
+  - h5py
+  - pip: 
+#    - sccaf 
+    - plotly 
+    - scvi-tools 
+    - scvelo
+    - scirpy
+#    - palantir
+    - velocyto
+    - pyscenic 
+    - scrublet
+    - scanorama
