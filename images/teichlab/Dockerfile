@@ -1,5 +1,5 @@
 ARG tag_name
-ARG parent_image="r-full"
+ARG parent_image="full"
 ARG registry="quay.io/cellgeni/jupyter"
 
 FROM $registry:$parent_image-$tag_name
@@ -17,10 +17,9 @@ RUN apt-get clean && \
 
 # conda packages
 COPY environment.yml /tmp/environment.yml
-RUN mamba env create --file /tmp/environment.yml && \
-    #/opt/conda/bin/conda activate teichlab && \
-    source activate teichlab && \
-    python -m ipykernel install --prefix=/opt/conda/envs/teichlab/ --name=teichlab
+RUN mamba create --name teichlab --clone base && \
+    mamba env update --name teichlab --file=/tmp/environment.yml && \
+    /bin/bash -c "source activate teichlab && python -m ipykernel install --prefix=/opt/conda/envs/teichlab/ --name=teichlab"
 
 # R packages
 RUN Rscript -e 'install.packages(c("vcfR","car","ggpubr","SoupX"));'
@@ -34,7 +33,7 @@ RUN fix-permissions $CONDA_DIR && \
     fix-permissions /usr/lib/R/ && \
     fix-permissions /usr/local/lib/R/site-library
 
-ENV TAG_NAME="teichlab-$tag_name"
-RUN echo "$TAG_NAME" >> /sanger/image.info
-
+RUN echo "$image_name=$tag_name" >> /sanger/image.info && \ 
+    conda list > /sanger/conda.info && \
+    Rscript -e "as.data.frame(installed.packages()[,c(1,3:4)])[,1:2,drop=FALSE]" > /sanger/r-packages.info
 
