@@ -46,5 +46,6 @@ eval "\$('/opt/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 EOF
 fi
 
+sudo chmod 600 /etc/ssh/ssh_config.d/keepalive.conf
 
 export USER=jovyan
