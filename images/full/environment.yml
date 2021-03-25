@@ -7,18 +7,16 @@ dependencies:
   - python = 3.8
   - pip
   - numpy
+  - numba==0.51.2
   - cython
   - python-igraph
   - scanpy
   - python-annoy
   - cython
   - cmake
-  - numpy
-  - python-igraph
   - pandas
   - louvain 
   - leidenalg
-  - scanpy 
   - scikit-learn 
   - matplotlib
   - seaborn
