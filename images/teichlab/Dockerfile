@@ -19,7 +19,7 @@ RUN apt-get clean && \
 COPY environment.yml /tmp/environment.yml
 RUN mamba create --name teichlab --clone base && \
     mamba env update --name teichlab --file=/tmp/environment.yml && \
-    /bin/bash -c "source activate teichlab && python -m ipykernel install --prefix=/opt/conda/envs/teichlab/ --name=teichlab"
+    /opt/conda/envs/teichlab/bin/python -m ipykernel install --prefix=/opt/conda/ --name=teichlab
 
 # R packages
 RUN Rscript -e 'install.packages(c("vcfR","car","ggpubr","SoupX"));'
