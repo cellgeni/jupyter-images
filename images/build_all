@@ -1,37 +1,39 @@
 #!/usr/bin/env bash
 
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        -t|--tag) TAG=$2 ;;
-        *) echo "Unknown parameter passed: $1"; exit 1 ;;
-    esac
-    shift
-done
+#Settings
+DOCKERFILE_ROOT_DIR=/home/ubuntu/docker-jupyter/images
+REGISTRY=quay.io/cellgeni/jupyter
+LOG_DIR=$DOCKERFILE_ROOT_DIR/logs/
+mkdir -p $LOG_DIR
 
+TAG=$1
 if [[ -z "$TAG" ]]; then
+  # Generate a tag with epoch if not provided
   TAG=$(date +%Y%m%d)
-  echo "📝 No tag provided, using: ${TAG}"
 fi
 
-./build.sh --tag $TAG --image base
+echo "Using tag $TAG"
+echo "Start building images"  | ts '[%Y-%m-%d %H:%M:%S]'
 
-echo "🐳 🐳 🐳 building julia, r-base and python at the same time"  | ts '[%Y-%m-%d %H:%M:%S]'
-./build.sh --tag $TAG --image julia &
-julia=$!
-./build.sh --tag $TAG --image r-base &
-r_base=$!
-./build.sh --tag $TAG --image python &
-python=$!
-wait $julia $r_base $python
+echo "🐳 building base image"  | ts '[%Y-%m-%d %H:%M:%S]'
+cd $DOCKERFILE_ROOT_DIR/base
+docker build --build-arg tag_name=$TAG --tag "$REGISTRY:base-$TAG" . >  "$LOG_DIR/base-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]'
+
+echo "🐳 building r-base"  | ts '[%Y-%m-%d %H:%M:%S]'
+cd $DOCKERFILE_ROOT_DIR/r-base
+docker build --build-arg tag_name=$TAG --tag "$REGISTRY:r-base-$TAG" . >  "$LOG_DIR/r-base-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]'
 
 echo "🐳 building r-full image"  | ts '[%Y-%m-%d %H:%M:%S]'
-./build.sh --tag $TAG --image r-full
+cd $DOCKERFILE_ROOT_DIR/r-full
+docker build --build-arg tag_name=$TAG --tag "$REGISTRY:r-full-$TAG"  . >  "$LOG_DIR/r-full-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]'
 
-echo "🐳 🐳 building python-r-full and teichlabn at the same time"  | ts '[%Y-%m-%d %H:%M:%S]'
-./build.sh --tag $TAG --image python-r-full &
-python_r_full=$!
-./build.sh --tag $TAG --image teichlab &
-teichlab=$!
-wait $python_r_full $teichlab
+echo "🐳 building full"  | ts '[%Y-%m-%d %H:%M:%S]'
+cd $DOCKERFILE_ROOT_DIR/full
+docker build --build-arg tag_name=$TAG --build-arg image_name="full" --tag "$REGISTRY:full-$TAG" . >  "$LOG_DIR/full-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]' 
 
-echo "finished building"  | ts '[%Y-%m-%d %H:%M:%S]'
+echo "🐳 building teichlab"  | ts '[%Y-%m-%d %H:%M:%S]'
+cd $DOCKERFILE_ROOT_DIR/teichlab
+docker build --build-arg tag_name=$TAG --tag "$REGISTRY:teichlab-$TAG" . >  "$LOG_DIR/teichlab-$TAG.build.log" | ts '[%Y-%m-%d %H:%M:%S]'
+
+echo "Finished building images"  | ts '[%Y-%m-%d %H:%M:%S]'
+
