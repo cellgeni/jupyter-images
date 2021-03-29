@@ -4,6 +4,9 @@ ARG registry="quay.io/cellgeni/jupyter"
 
 FROM $registry:$parent_image-$tag_name
 
+ARG tag_name
+ARG image_name="teichlab"
+
 USER root
 
 # general OS packages
@@ -33,7 +36,7 @@ RUN fix-permissions $CONDA_DIR && \
     fix-permissions /usr/lib/R/ && \
     fix-permissions /usr/local/lib/R/site-library
 
-RUN echo "$image_name=$tag_name" >> /sanger/image.info && \ 
+RUN echo "$image_name=$tag_name" > /sanger/image.info && \ 
     conda list > /sanger/conda.info && \
     Rscript -e "as.data.frame(installed.packages()[,c(1,3:4)])[,1:2,drop=FALSE]" > /sanger/r-packages.info
 

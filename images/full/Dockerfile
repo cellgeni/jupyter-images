@@ -6,7 +6,7 @@ FROM ${registry}:${parent_image}-${tag_name}
 
 ARG tag_name
 ARG image_name="full"
-ARG julia_version="1.5.0"
+ARG julia_version="1.0.5"
 
 USER root
 
@@ -38,9 +38,8 @@ RUN mkdir /etc/julia && \
     chown "${NB_USER}" "${JULIA_PKGDIR}" && \
     fix-permissions "${JULIA_PKGDIR}"
 
-COPY install.jl /tmp/install.jl
-RUN julia -e "include(\"/tmp/install.jl\");"
-
+RUN julia -e "using Pkg; Pkg.update(); Pkg.add(\"IJulia\")" && \
+    julia -e "using IJulia"
 
 # move kernelspec out of home to the system share location \
 RUN mv "${HOME}/.local/share/jupyter/kernels/julia"* "${CONDA_DIR}/share/jupyter/kernels/" && \
