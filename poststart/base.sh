@@ -5,8 +5,8 @@ if [[ "$(df -k /home/jovyan | awk 'NR>1 {print $4}')" -ge "5000000" ]]; then
     TMP_NOTEBOOKS=/tmp/example-notebooks.zip
     wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip
     unzip $TMP_NOTEBOOKS -d /tmp
-    rm /tmp/notebooks-master/.gitignore /tmp/notebooks-master/LICENSE /tmp/notebooks-master/README.md
-    cp -Rf /tmp/notebooks-master/. /home/jovyan/
+    cp -Rf /tmp/notebooks-master/notebooks /home/jovyan/
+    cp -Rf /tmp/notebooks-master/data /home/jovyan/
     rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
 fi
 
