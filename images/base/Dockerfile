@@ -16,10 +16,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     # build dependencies for singularity
     build-essential uuid-dev libgpgme-dev squashfs-tools libseccomp-dev \
     pkg-config gcc g++ cryptsetup-bin libgit2-dev \
-    # extra packages
-    graphviz \
     # base dependencies for general stuff
-    libhdf5-dev hdf5-tools libigraph0-dev libopenblas-dev libgraphviz-dev && \
+    libhdf5-dev hdf5-tools libigraph0-dev libopenblas-dev \
+    graphviz libgraphviz-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
