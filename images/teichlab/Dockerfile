@@ -11,11 +11,7 @@ USER root
 
 # general OS packages
 RUN apt-get update -y -qq && \
-    apt-get install -y -qq \
-      samtools bcftools bedtools parallel 
-
-# clean up
-RUN apt-get clean && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # conda packages
