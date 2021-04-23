@@ -23,13 +23,12 @@ dependencies:
   - bbknn
   - h5py
   - pip: 
-#    - sccaf 
-    - plotly 
-    - scvi-tools 
+    - cello-classify
+    - plotly
+    - scvi-tools
     - scvelo
     - scirpy
-#    - palantir
     - velocyto
-    - pyscenic 
+    - pyscenic
     - scrublet
     - scanorama
