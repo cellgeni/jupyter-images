@@ -10,7 +10,7 @@ USER root
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     # basic packages 
     htop vim emacs unzip git wget axel tmux nano rsync  \
-    less parallel sshpass lsb-release cifs-utils \
+    less parallel sshpass lsb-release cifs-utils jq \
     # sshfs dependencies
     fuse libfuse2 sshfs s3fs \
     # build dependencies for singularity
