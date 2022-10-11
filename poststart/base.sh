@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # copy example notebooks only if there are more than 5GB left
-if [[ "$(df -k /home/jovyan | awk 'NR>1 {print $4}')" -ge "5000000" ]]; then
-    TMP_NOTEBOOKS=/tmp/example-notebooks.zip
-    wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip
-    unzip $TMP_NOTEBOOKS -d /tmp
-    cp -Rf /tmp/notebooks-master/notebooks /home/jovyan/
-    cp -Rf /tmp/notebooks-master/data /home/jovyan/
-    rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
-fi
+#if [[ "$(df -k /home/jovyan | awk 'NR>1 {print $4}')" -ge "5000000" ]]; then
+#    TMP_NOTEBOOKS=/tmp/example-notebooks.zip
+#    wget --quiet -O $TMP_NOTEBOOKS https://github.com/cellgeni/notebooks/archive/master.zip
+#    unzip $TMP_NOTEBOOKS -d /tmp
+#    cp -Rf /tmp/notebooks-master/notebooks /home/jovyan/
+#    cp -Rf /tmp/notebooks-master/data /home/jovyan/
+#    rm -rf $TMP_NOTEBOOKS /tmp/notebooks-master/
+#fi
 
 
 #conda config file
