@@ -33,6 +33,9 @@ if [ ! -d /nfs ] || [ ! -d /lustre ] || [ ! -d /warehouse ] || [ ! -d /software 
     sudo mkdir -p /software
 fi
 
+# update mount-farm
+sudo mv /tmp/jupyter-images/images/base/mount-farm /usr/local/bin/mount-farm
+sudo chmod +x /usr/local/bin/mount-farm
 
 # create irods path
 mkdir -p /home/jovyan/.irods/
