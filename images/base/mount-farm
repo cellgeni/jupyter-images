@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FARM_LOGIN=farm5-login.internal.sanger.ac.uk
+FARM_LOGIN=farm22-login.internal.sanger.ac.uk
 
 MOUNTED_DIRS=$(mount | grep sshfs | awk '{print $3}' | grep -E "^(/nfs|/lustre|/warehouse)$")
 if [[ ! -z ${MOUNTED_DIRS} ]];
@@ -13,7 +13,7 @@ read -p "[>] Input your farm user: " SANGER_USER
 read -sp "[>] Input your farm password: " SANGER_PASSWORD
 echo ""
 echo "[+] Mounting:"
-for MOUNT_POINT in /nfs /lustre /warehouse; do
+for MOUNT_POINT in /nfs /lustre /warehouse /software; do
     echo -e "\t- ${MOUNT_POINT}"
     if [ ! -d "$MOUNT_POINT" ]; then
         sudo mkdir -p ${MOUNT_POINT}
