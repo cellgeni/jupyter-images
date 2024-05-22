@@ -10,7 +10,6 @@ git clone https://github.com/cellgeni/jupyter-images.git /tmp/jupyter-images
 if [[ -d /poststart ]]; then
   sudo rm -rf /poststart
 fi
-sudo mv /tmp/jupyter-images/images/base/mount-farm /usr/local/bin/mount-farm
-sudo chmod +x /usr/local/bin/mount-farm
+
 sudo mv /tmp/jupyter-images/poststart /
 sudo chmod +x /poststart/*
