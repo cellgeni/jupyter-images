@@ -2,7 +2,7 @@
 
 FARM_LOGIN=farm22-login.internal.sanger.ac.uk
 
-MOUNTED_DIRS=$(mount | grep sshfs | awk '{print $3}' | grep -E "^(/nfs|/lustre|/warehouse)$")
+MOUNTED_DIRS=$(mount | grep sshfs | awk '{print $3}' | grep -E "^(/nfs|/lustre|/warehouse|/software)$")
 if [[ ! -z ${MOUNTED_DIRS} ]];
 then
    echo "[+] Unmounting previous mounted folders ($(echo $MOUNTED_DIRS | paste -sd "," -))"
