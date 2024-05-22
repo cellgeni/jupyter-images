@@ -26,10 +26,11 @@ EOF
 
 
 # create matching folders to mount the farm
-if [ ! -d /nfs ] || [ ! -d /lustre ] || [ ! -d /warehouse ]; then
+if [ ! -d /nfs ] || [ ! -d /lustre ] || [ ! -d /warehouse ] || [ ! -d /software ]; then
     sudo mkdir -p /nfs
     sudo mkdir -p /lustre
     sudo mkdir -p /warehouse
+    sudo mkdir -p /software
 fi
 
 
