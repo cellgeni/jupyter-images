@@ -1,8 +1,7 @@
 env_prompt: ({name})
 channels:
-  - conda-forge
   - bioconda
-  - defaults
+  - conda-forge
 envs_dirs:
   - /home/jovyan/conda-envs/
 create_default_packages:
