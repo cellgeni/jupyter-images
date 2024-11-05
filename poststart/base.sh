@@ -17,11 +17,13 @@ env_prompt: ({name})
 channels:
   - conda-forge
   - bioconda
+  - nodefaults
 envs_dirs:
   - /home/jovyan/my-conda-envs/
 create_default_packages:
   - pip
   - ipykernel
+denylist_channels: [defaults, anaconda, r, main, pro] #!final
 EOF
 
 
